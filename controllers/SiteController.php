@@ -154,13 +154,20 @@ class SiteController extends Controller
         endforeach;
         $data = $jadwalDokterStorage;
         if (\Yii::$app->request->isAjax) {
-            return $this->renderAjax('../site/index', [
+            // return $this->renderAjax('../site/index', [
+            return $this->renderAjax('../site/index-ticker', [
                 'data' => $data,
             ]);
         } else {
-            return $this->render('../site/index', [
+            // return $this->render('../site/index', [
+            return $this->render('../site/index-ticker', [
                 'data' => $data,
             ]);
         }
+    }
+
+    public function actionTes()
+    {
+        return $this->render('tes');
     }
 }
