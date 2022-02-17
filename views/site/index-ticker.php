@@ -63,6 +63,11 @@ $this->title = 'Portal Informasi RSUD Arifin Achmad Jadwal Dokter';
         background-color: #039FBE;
         color: #ffffff;
     }
+
+    .myWrapper .col-lg-6 {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
 </style>
 
 <div class="container-fluid">
@@ -75,36 +80,37 @@ $this->title = 'Portal Informasi RSUD Arifin Achmad Jadwal Dokter';
         </div>
     </div>
     <div class="myWrapper">
-        <div class="row">
+        <div class="col-lg-12" style="padding-left: 0px; padding-right: 0px;">
             <?php
             if (isset($data[1])) {
-                foreach ($data as $dataV) {
-                    foreach ($dataV['detail_dokter'] as $value) { ?>
+                for ($i = 0; $i < count($data); $i += 2) {
+            ?>
+                    <div class="row">
                         <div class="col-lg-6">
                             <div class="row">
                                 <div class="col-md-3" style="background-position:center; background-size:cover; width:240px !important; height:350px; border-radius: 10%; margin-left: 5px; margin-right:20px">
                                     <?php
-                                    if ($value[2] == null) {
+                                    if ($data[$i][2] == null) {
                                         echo "<img src='http://192.168.254.67/jadwal-dokter/web/images/doktor.jpg' style='background-position:center; background-size:cover; width:260px !important; height:350px; border-radius: 10%; margin-right:20px>'";
                                     } ?>
 
-                                    <img src="http://192.168.254.67/informasi/web/informasi/images/dokter/<?= $value[2]; ?>" style="background-position:center; background-size:cover; width:260px !important; height:350px; border-radius: 10%; margin-right:20px">
+                                    <img src="http://192.168.254.67/informasi/web/informasi/images/dokter/<?= $data[$i][2]; ?>" style="background-position:center; background-size:cover; width:260px !important; height:350px; border-radius: 10%; margin-right:20px">
                                     &nbsp;
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-list-dokter" style="background-color:#039FBE;">
                                         <div class="pull-left">
-                                            <span><?= $value[1]; ?></span>
+                                            <span><?= $data[$i][1]; ?></span>
                                         </div>
                                     </div>
                                     <div class="card-list-dokter" style="background-color:#47C659; margin-top:5px">
-                                        <?= $value[3]; ?>
+                                        <?= $data[$i][3]; ?>
                                     </div>
 
                                     <div class="card-list-dokter2" style="margin-top:5px">
 
                                         <div class="pull-left">
-                                            <?php foreach ($value[4] as $k => $y) : ?>
+                                            <?php foreach ($data[$i][4] as $k => $y) : ?>
                                                 <span class="alert alert-info"><?= $y ?></span>
                                             <?php endforeach; ?>
                                         </div>
@@ -114,8 +120,42 @@ $this->title = 'Portal Informasi RSUD Arifin Achmad Jadwal Dokter';
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-md-3" style="background-position:center; background-size:cover; width:240px !important; height:350px; border-radius: 10%; margin-left: 5px; margin-right:20px">
+                                    <?php
+                                    if ($data[$i + 1][2] == null) {
+                                        echo "<img src='http://192.168.254.67/jadwal-dokter/web/images/doktor.jpg' style='background-position:center; background-size:cover; width:260px !important; height:350px; border-radius: 10%; margin-right:20px>'";
+                                    } ?>
+
+                                    <img src="http://192.168.254.67/informasi/web/informasi/images/dokter/<?= $data[$i + 1][2]; ?>" style="background-position:center; background-size:cover; width:260px !important; height:350px; border-radius: 10%; margin-right:20px">
+                                    &nbsp;
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-list-dokter" style="background-color:#039FBE;">
+                                        <div class="pull-left">
+                                            <span><?= $data[$i + 1][1]; ?></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-list-dokter" style="background-color:#47C659; margin-top:5px">
+                                        <?= $data[$i + 1][3]; ?>
+                                    </div>
+
+                                    <div class="card-list-dokter2" style="margin-top:5px">
+
+                                        <div class="pull-left">
+                                            <?php foreach ($data[$i + 1][4] as $k => $y) : ?>
+                                                <span class="alert alert-info"><?= $y ?></span>
+                                            <?php endforeach; ?>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             <?php
-                    }
                 }
             } ?>
         </div>

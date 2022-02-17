@@ -15,7 +15,7 @@ use app\models\JadwalPoliklinik;
 use app\models\JadwalPoliklinikSearch;
 use app\models\Unit;
 use yii\data\Pagination;
-
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
 class SiteController extends Controller
@@ -153,6 +153,15 @@ class SiteController extends Controller
             $i++;
         endforeach;
         $data = $jadwalDokterStorage;
+
+        $data = array_column($data, 'detail_dokter');
+        $data = array_merge(... $data);
+
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+        // die;
+
         if (\Yii::$app->request->isAjax) {
             // return $this->renderAjax('../site/index', [
             return $this->renderAjax('../site/index-ticker', [
